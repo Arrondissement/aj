@@ -13,9 +13,16 @@ body {
     align-items: center;
     flex-direction: column;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #ffdde1, #ee9ca7);
     overflow: hidden;
     position: relative;
+
+    background: 
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url("https://drive.google.com/uc?export=view&id=1FiLG9giPMCFJXFAte-FP_U29oXQNtSSC");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 h1 {
@@ -151,5 +158,30 @@ function moveButton() {
 }
 
 noBtn.addEventListener("mouseover", moveButton);
-noBtn.ad
+noBtn.addEventListener("click", moveButton);
 
+// Lluvia de emojis
+const hearts = ["🧸","🪐","🫂","🏋🏻","🏀","🤍","💌"];
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}
+
+setInterval(createHeart, 300);
+
+</script>
+
+</body>
+</html>
