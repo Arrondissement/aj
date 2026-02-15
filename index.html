@@ -26,7 +26,6 @@ h1 {
     z-index: 2;
 }
 
-/* Contenedor de botones centrado */
 .buttons {
     display: flex;
     gap: 20px;
@@ -38,7 +37,7 @@ h1 {
 
 button {
     padding: 15px 30px;
-    font-size: 20px;
+    font-size: 18px;
     border: none;
     border-radius: 12px;
     cursor: pointer;
@@ -59,6 +58,18 @@ button {
     color: white;
 }
 
+input {
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    margin-right: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
 /* Corazones */
 .heart {
     position: absolute;
@@ -67,38 +78,64 @@ button {
 }
 
 @keyframes fall {
-    0% {
-        transform: translateY(-10vh);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(110vh);
-        opacity: 0;
-    }
+    0% { transform: translateY(-10vh); opacity: 1; }
+    100% { transform: translateY(110vh); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
-<h1>Do you love me?</h1>
+<h1 id="mainTitle">Do you love me?</h1>
 
-<div class="buttons">
-    <button id="yesBtn" onclick="answerYes()">Yes</button>
+<div class="buttons" id="mainButtons">
+    <button id="yesBtn" onclick="showPassword()">Yes</button>
     <button id="noBtn">No</button>
 </div>
 
+<div id="passwordSection" class="hidden">
+    <h1 style="font-size:35px;">Enter password</h1>
+    <div style="display:flex; align-items:center; justify-content:center;">
+        <input type="text" id="passwordInput" placeholder="Password">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+    <br>
+    <button onclick="showHint()">Hint</button>
+    <p id="hintText" style="color:white; margin-top:15px;"></p>
+    <p id="errorText" style="color:yellow;"></p>
+</div>
+
 <script>
-function answerYes() {
-    window.open("https://drive.google.com/uc?export=view&id=16z_SVPSXCkKd0xBh4npzZOsDL8lsge6Q", "_blank");
+
+// YES -> show password screen
+function showPassword() {
+    document.getElementById("mainTitle").classList.add("hidden");
+    document.getElementById("mainButtons").classList.add("hidden");
+    document.getElementById("passwordSection").classList.remove("hidden");
 }
 
+// CHECK PASSWORD
+function checkPassword() {
+    const input = document.getElementById("passwordInput").value;
 
+    if (input === "2521") {
+        window.open("https://drive.google.com/uc?export=view&id=16z_SVPSXCkKd0xBh4npzZOsDL8lsge6Q", "_blank");
+    } else {
+        document.getElementById("errorText").innerText = "Wrong password. Try again.";
+    }
+}
 
+// HINT
+function showHint() {
+    document.getElementById("hintText").innerText =
+    "Google the name of a Korean series where the main characters are Na Hee-do and Baek Yi-jin.";
+}
+
+// NO button runs away
 const noBtn = document.getElementById("noBtn");
 
 function moveButton() {
-    noBtn.style.position = "fixed"; // mejor que absolute
+    noBtn.style.position = "fixed";
 
     const btnWidth = noBtn.offsetWidth;
     const btnHeight = noBtn.offsetHeight;
@@ -114,29 +151,5 @@ function moveButton() {
 }
 
 noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("click", moveButton);
+noBtn.ad
 
-/* Lluvia de negros */
-const hearts = ["🧸","🪐","🫂","🏋🏻","🏀","🤍","💌"];
-
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
-
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 5000);
-}
-
-setInterval(createHeart, 300);
-</script>
-
-</body>
-</html>
