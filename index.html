@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Is Nicole black?</title>
+<title>For you!</title>
 
 <style>
 body {
@@ -96,11 +96,16 @@ function answerYes() {
 const noBtn = document.getElementById("noBtn");
 
 function moveButton() {
-    // Ahora se vuelve absoluto SOLO cuando se mueve
-    noBtn.style.position = "absolute";
+    noBtn.style.position = "fixed"; // mejor que absolute
 
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 60);
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
+
+    const maxX = window.innerWidth - btnWidth - 10;
+    const maxY = window.innerHeight - btnHeight - 10;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
