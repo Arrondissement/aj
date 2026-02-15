@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Do you love me?</title>
+<title>Is Nicole black?</title>
 
 <style>
 body {
@@ -26,15 +26,23 @@ h1 {
     z-index: 2;
 }
 
+/* Contenedor de botones centrado */
+.buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    position: relative;
+}
+
 button {
     padding: 15px 30px;
     font-size: 20px;
-    margin: 10px;
     border: none;
     border-radius: 12px;
     cursor: pointer;
     transition: transform 0.2s;
-    z-index: 2;
 }
 
 #yesBtn {
@@ -49,7 +57,6 @@ button {
 #noBtn {
     background-color: #333;
     color: white;
-    position: absolute;
 }
 
 /* Corazones */
@@ -76,7 +83,7 @@ button {
 
 <h1>Do you love me?</h1>
 
-<div>
+<div class="buttons">
     <button id="yesBtn" onclick="answerYes()">Yes</button>
     <button id="noBtn">No</button>
 </div>
@@ -88,18 +95,22 @@ function answerYes() {
 
 const noBtn = document.getElementById("noBtn");
 
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("click", moveButton);
-
 function moveButton() {
+    // Ahora se vuelve absoluto SOLO cuando se mueve
+    noBtn.style.position = "absolute";
+
     const x = Math.random() * (window.innerWidth - 120);
     const y = Math.random() * (window.innerHeight - 60);
+
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 }
 
-/* Lluvia de corazones */
-const hearts = ["<3","🤍","ღ","♡","ও","❣","❤️"];
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("click", moveButton);
+
+/* Lluvia de negros */
+const hearts = ["🧸","🪐","🫂","🏋🏻","🏀","🤍","💌"];
 
 function createHeart() {
     const heart = document.createElement("div");
